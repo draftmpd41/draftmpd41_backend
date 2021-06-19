@@ -66,7 +66,7 @@ class addInput(cf.BaseHandler):
             return cf.makeError("ABEY CATEGORY HAI YA ESSAY?")
 
         if not cf.validateLL(lat,lon):
-            return cf.makeError("KITHEY BHAI? DILLI MEIN DAAL!")
+            return cf.makeError("KITHEY JAARIYO BHAI? DILLI IDHAR HAI!")
         
         if not cf.validateEmail(email):
             return cf.makeError("INVALID EMAIL")
