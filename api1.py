@@ -69,7 +69,7 @@ class addInput(cf.BaseHandler):
 
         payload['mid'] = mid
         payload['username'] = 'anon'
-        date1, timestamp = cf.getDateNTime()
+        timestamp, date1 = cf.getDateNTime()
         payload['date1'] = date1
         payload['created_on'] = timestamp
         payload['deleted'] = 0
