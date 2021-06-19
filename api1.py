@@ -102,12 +102,18 @@ class listInputs(cf.BaseHandler):
         """
         returnD = {}
 
-        s1 = f"""select * from messages
+        s1 = f"""select mid, message, category, name, username, 
+        lat, lon, date1, created_on, modified_on 
+        from messages
         where approved = 1
+        and deleted != 1
         order by created_on
         """
-        s2 = f"""select * from messages
+        s2 = f"""select mid, message, category, name, username, 
+        lat, lon, date1, created_on, modified_on
+        from messages
         where approved != 1
+        and deleted != 1
         order by created_on
         """
 
@@ -115,5 +121,5 @@ class listInputs(cf.BaseHandler):
         returnD['submitted'] = dbconnect.makeQuery(s2, output='list')
         end = time.time()
         returnD['timeTaken'] = round(end-start,2)
-
+        cf.logmessage(f"listInputs done, {returnD['timeTaken']} secs")
         return cf.makeSuccess(returnD)

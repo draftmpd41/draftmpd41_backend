@@ -2,4 +2,3 @@
 logs
 __pycache__
 config/db_creds.json
-local_launch.sh

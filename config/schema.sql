@@ -14,9 +14,11 @@ CREATE TABLE messages (
     modified_on DATETIME NULL,
     modified_by VARCHAR(100) NULL,
     deleted BOOL NULL,
-    approved BOOL NULL
+    approved BOOL NULL,
+    consent BOOL NULL
 );
 CREATE INDEX messages_i1 ON messages (date1);
 CREATE INDEX messages_i2 ON messages (username);
 CREATE INDEX messages_i3 ON messages (approved);
 CREATE INDEX messages_i4 ON messages (category);
+CREATE INDEX messages_i5 ON messages (consent);

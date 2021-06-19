@@ -38,6 +38,7 @@ class Application(tornado.web.Application):
     _routes = [
         # tornado.web.url(r"/API/fetchBreezoMap", api1.fetchBreezoMap),
         tornado.web.url(r"/API/addInput", api1.addInput),
+        tornado.web.url(r"/API/listInputs", api1.listInputs),
         tornado.web.url(r"/(.*)", MyStaticFileHandler, {"path": root, "default_filename": "redirect.html"})
     ]
     def __init__(self):
