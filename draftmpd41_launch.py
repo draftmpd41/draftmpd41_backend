@@ -43,7 +43,7 @@ class Application(tornado.web.Application):
     ]
     def __init__(self):
         settings = {
-            "debug": True, # make this false when pushing to openshift
+            "debug": False, # make this false when pushing to openshift
             "cookie_secret": "EYeRT%&)WERterGEfYTjR",
             "compress_response": True # https://stackoverflow.com/a/11872086/4355695    
         }
