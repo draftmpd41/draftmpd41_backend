@@ -53,7 +53,7 @@ class addInput(cf.BaseHandler):
         lat = payload.get('lat')
         lon = payload.get('lon')
 
-        if len(message) > maxMessageLength:
+        if len(message) > cf.maxMessageLength:
             return cf.makeError("KUCH BHI KYA")
 
         if not cf.validateLL(lat,lon):
@@ -75,7 +75,7 @@ class addInput(cf.BaseHandler):
         payload['deleted'] = 0
         payload['approved'] = 0
 
-        status = dbconnect.addRow(payload)
+        status = dbconnect.addRow(payload, tablename='messages')
         if not status:
             return cf.makeError("Error adding to DB")
 
