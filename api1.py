@@ -56,8 +56,17 @@ class addInput(cf.BaseHandler):
         if len(message) > cf.maxMessageLength:
             return cf.makeError("KUCH BHI KYA")
 
+        if len(message) < 50:
+            return cf.makeError("KUCH TOH KAHO")
+
+        if len(category) < 4:
+            return cf.makeError("ITNU SA CATEGORY?")
+
+        if len(category) > 100:
+            return cf.makeError("ABEY CATEGORY HAI YA ESSAY?")
+
         if not cf.validateLL(lat,lon):
-            return cf.makeError("KIDHAR BHI KYA")
+            return cf.makeError("KITHEY BHAI? DILLI MEIN DAAL!")
         
         if not cf.validateEmail(email):
             return cf.makeError("INVALID EMAIL")
