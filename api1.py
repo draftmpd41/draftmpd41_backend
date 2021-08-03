@@ -11,11 +11,11 @@ import dbconnect
 
 root = os.path.dirname(__file__) # needed for tornado
 # dataFolder = os.path.join(root,'data')
+APIKEY = os.environ.get('APIKEY', False)
+assert APIKEY, "APIKEY not loaded!"
 
 #########################
 # API CALLS
-
-# alert_id = uuid.uuid4().hex # make a new id like dc77fcf4020943a0adcf499a02fc735a
 
 class addInput(cf.BaseHandler):
     executor = concurrent.futures.ThreadPoolExecutor(cf.maxThreads)
@@ -43,8 +43,12 @@ class addInput(cf.BaseHandler):
         '''
         # security check
         if not dbconnect.sqlSecurity_payload(payload):
-            return cf.makeError("CHAL HUT")
+            return cf.makeError("CHORI KARNE WAALEY TERA MOO KAALA")
         
+        global APIKEY
+        if payload.get('apikey','') != APIKEY:
+            return cf.makeError("YOU HAVE BEEN REPORTED TO CRIME BRANCH")
+
         message = payload.get('message')
         category = payload.get('category')
         name = payload.get('name')
@@ -69,12 +73,12 @@ class addInput(cf.BaseHandler):
             return cf.makeError("KITHEY JAARIYO BHAI? DILLI IDHAR HAI!")
         
         if not cf.validateEmail(email):
-            return cf.makeError("INVALID EMAIL")
+            return cf.makeError("BETA, EMAIL ADDRESS DAALO, POSTAL ADDRESS NAHIN")
         
         if not cf.validateMobile(mobile):
-            return cf.makeError("INVALID MOBILE")
+            return cf.makeError("MOBILE TOH THEEK SE DAALA KAR")
 
-        mid = uuid.uuid4().hex
+        mid = uuid.uuid4().hex # make a new unique id like dc77fcf4020943a0adcf499a02fc735a
 
         payload['mid'] = mid
         payload['username'] = 'anon'
@@ -88,7 +92,7 @@ class addInput(cf.BaseHandler):
         if not status:
             return cf.makeError("Error adding to DB")
 
-        returnD = {'message': f'Thank you for your inputs. mid: {mid}'}
+        returnD = {'message': f'Thank you for your inputs. mid: {mid}', 'mid':mid}
         return cf.makeSuccess(returnD)    
 
 
